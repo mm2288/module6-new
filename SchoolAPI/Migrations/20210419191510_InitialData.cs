@@ -11,8 +11,8 @@ namespace SchoolAPI.Migrations
                 name: "Organizations",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<Guid>(nullable: false),
-                    OrgName = table.Column<string>(maxLength: 60, nullable: false)
+                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrgName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,9 +23,9 @@ namespace SchoolAPI.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 30, nullable: false),
-                    OrganizationId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
