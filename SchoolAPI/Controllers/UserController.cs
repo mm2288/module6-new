@@ -10,6 +10,7 @@ namespace CompanyEmployees.Controllers
 {
     [Route("api/v1/users")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class UserController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
