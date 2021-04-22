@@ -18,7 +18,7 @@ namespace Entities.Models
         public string LastName { get; set; }
 
         //[ForeignKey(nameof(Organization))]
-        public Guid OrganizationId { get; set; }
+        //public Guid OrganizationId { get; set; }
 
         //public Organization Organization { get; set; }
     }

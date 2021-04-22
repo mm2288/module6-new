@@ -15,12 +15,12 @@ namespace Entities.DataTransferObjects
 
         [Required(ErrorMessage = "First name is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the first name is 60 characters.")]
-        [MinLength(1, ErrorMessage = "Minimum length for the first name is 1 characters.")]
+        [MinLength(2, ErrorMessage = "Minimum length for the first name is 2 characters.")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Country is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the last name is 60 characters.")]
-        [MinLength(1, ErrorMessage = "Minimum length for the last name is 1 characters.")]
+        [MinLength(2, ErrorMessage = "Minimum length for the last name is 2 characters.")]
         public string LastName { get; set; }
     }
 }
