@@ -13,22 +13,22 @@ namespace Entities.Configuration
             (
                 new Organization
                 {
-                    Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                    Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
                     OrgName = "xyz org",
                     Country = "USA",
                     City = "Bloomfield",
                 },
                 new Organization
                 {
-                    Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                    Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
                     OrgName = "lmnop org",
                     Country = "ZM",
                     City = "Lusaka",
                 },
                 new Organization
                 {
-                    Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce4"),
-                    OrgName = "megan's org",
+                    Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce6"),
+                    OrgName = "megan's organization",
                     Country = "USA",
                     City = "New York",
                 }

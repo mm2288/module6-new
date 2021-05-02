@@ -44,24 +44,24 @@ namespace SchoolAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
                             City = "Bloomfield",
                             Country = "USA",
                             OrgName = "xyz org"
                         },
                         new
                         {
-                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
                             City = "Lusaka",
                             Country = "ZM",
                             OrgName = "lmnop org"
                         },
                         new
                         {
-                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce4"),
+                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce6"),
                             City = "New York",
                             Country = "USA",
-                            OrgName = "megan's org"
+                            OrgName = "megan's organization"
                         });
                 });
 
@@ -78,7 +78,7 @@ namespace SchoolAPI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrganizationId")
+                    b.Property<Guid>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
@@ -98,6 +98,7 @@ namespace SchoolAPI.Migrations
                             Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             FirstName = "Keith",
                             LastName = "Williams",
+                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
                             UserName = "kwilliams"
                         },
                         new
@@ -105,6 +106,7 @@ namespace SchoolAPI.Migrations
                             Id = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                             FirstName = "Keith",
                             LastName = "Williams",
+                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
                             UserName = "ka393939"
                         },
                         new
@@ -112,6 +114,7 @@ namespace SchoolAPI.Migrations
                             Id = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
                             FirstName = "Keith",
                             LastName = "Williams",
+                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
                             UserName = "kaw3939"
                         },
                         new
@@ -119,15 +122,20 @@ namespace SchoolAPI.Migrations
                             Id = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812"),
                             FirstName = "Megan",
                             LastName = "Machado",
-                            UserName = "megan"
+                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
+                            UserName = "megan12"
                         });
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
-                    b.HasOne("Entities.Models.Organization", null)
+                    b.HasOne("Entities.Models.Organization", "Organization")
                         .WithMany("Users")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("Entities.Models.Organization", b =>
