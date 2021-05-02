@@ -31,10 +31,19 @@ namespace SchoolAPI
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddControllers(config =>
+            {
+                config.RespectBrowserAcceptHeader = true;
+                config.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters()
+              .AddCustomCSVFormatter();
+
             services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
             services.ConfigureSwagger();
             services.AddControllers();
         }
