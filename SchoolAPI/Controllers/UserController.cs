@@ -66,9 +66,11 @@ namespace CompanyEmployees.Controllers
             _repository.User.CreateUser(userEntity);
             _repository.Save();
 
-            var userToReturn = _mapper.Map<UserDto>(userEntity);
+            return StatusCode(201);
 
-            return CreatedAtRoute("getOrUserById", new { id = userToReturn.Id }, userToReturn);
+            //var userToReturn = _mapper.Map<UserDto>(userEntity);
+
+            //return CreatedAtRoute("getOrUserById", new { id = userToReturn.Id }, userToReturn);
         }
 
         [HttpPut("{id}")]
