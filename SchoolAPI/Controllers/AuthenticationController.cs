@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace SchoolAPI.Controllers
 {
+    [Route("api/authentication")]
+    [ApiController]
     public class AuthenticationController : ControllerBase
     {
         private readonly ILoggerManager _logger;
@@ -25,6 +27,7 @@ namespace SchoolAPI.Controllers
         }
 
         [HttpPost]
+        //[ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);

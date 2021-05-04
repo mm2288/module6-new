@@ -48,30 +48,6 @@ namespace CompanyEmployees.Controllers
             }
         }
 
-        [HttpPost(Name = "createUser")]
-        public IActionResult CreateUser([FromBody] UserForCreationDto user)
-        {
-            if (user == null)
-            {
-                _logger.LogError("User ForCreationDto object sent from client is null.");
-                return BadRequest("User ForCreationDto object is null");
-            }
-            if (!ModelState.IsValid)
-            {
-                _logger.LogError("Invalid model state for the UserForCreationDto object");
-                return UnprocessableEntity(ModelState);
-            }
-
-            var userEntity = _mapper.Map<User>(user);
-
-            _repository.User.CreateUser(userEntity);
-            _repository.Save();
-
-            var userToReturn = _mapper.Map<UserDto>(userEntity);
-
-            return CreatedAtRoute("getOrUserById", new { id = userToReturn.Id }, userToReturn);
-        }
-
         [HttpPut("{id}")]
         public IActionResult UpdateUser(Guid id, [FromBody] UserForUpdateDto user)
         {

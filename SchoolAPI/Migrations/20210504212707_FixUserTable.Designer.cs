@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20210502160355_update")]
-    partial class update
+    [Migration("20210504212707_FixUserTable")]
+    partial class FixUserTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -150,64 +150,6 @@ namespace SchoolAPI.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "3dc25d54-a9b0-4866-9e6b-d15804261e3f",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "91062aad-df3d-4204-b5b3-0408f16a19e0",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "kwilliams",
-                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb0edd9a-7368-4c9c-8d5c-c3976f540cd8",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            Id = "18c2c699-fbd8-41fb-932b-6ad61d595b90",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a772da86-a328-47ae-b679-4ab7af253299",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "ka393939",
-                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8f60a659-7225-45e0-a50c-b45e7ed3e71a",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a")
-                        },
-                        new
-                        {
-                            Id = "2a2a212b-f8ef-4c4c-bcdd-cf325f7c7113",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e408b1a8-d1f2-4344-a3ed-689327a82c76",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "kaw3939",
-                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "27b489ab-3f9a-4841-bf03-bc286c4e021c",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811")
-                        },
-                        new
-                        {
-                            Id = "82a83c31-63d2-49e5-a89d-25b00c31da7e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad77af37-a3f4-46c4-93f4-f625330f34eb",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "megan12",
-                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "28935fec-a899-4cc4-85f9-7f404ca21563",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -239,15 +181,15 @@ namespace SchoolAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4afc93f9-fdf9-412a-9b61-4752c1ccb1ae",
-                            ConcurrencyStamp = "a0d078ce-7ad0-4f78-9056-46bcf59f0e60",
+                            Id = "ac9a9ae0-d071-43a9-8645-9df853064e41",
+                            ConcurrencyStamp = "c6b81471-4d7e-4072-88bf-b2ff8f143a4b",
                             Name = "manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "b4185aff-9452-412c-9670-6c8de5e43f0b",
-                            ConcurrencyStamp = "34c83356-5269-430f-b89a-5459a6544951",
+                            Id = "731e2cd9-e860-4ef3-8cc6-96d631e1c6f8",
+                            ConcurrencyStamp = "cef7104f-e351-4ba9-a377-b956c8768bd3",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

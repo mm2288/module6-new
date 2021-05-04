@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20210502152404_AddedRolesToDb")]
-    partial class AddedRolesToDb
+    [Migration("20210504215432_FixingUsers")]
+    partial class FixingUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,11 +98,6 @@ namespace SchoolAPI.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -111,7 +106,7 @@ namespace SchoolAPI.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<Guid>("OrganizationId")
+                    b.Property<Guid?>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PasswordHash")
@@ -128,10 +123,6 @@ namespace SchoolAPI.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("UserId");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -150,64 +141,6 @@ namespace SchoolAPI.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e88a7a98-39cc-47c0-97a8-487e0ea71ce0",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c4ce8d7a-2784-4e67-932a-28225682d600",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "kwilliams",
-                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "281701dd-7825-402b-96f9-f898b1d39426",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
-                        },
-                        new
-                        {
-                            Id = "ea602c4d-57df-442a-8cf9-3e55947f2d0d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d0e07ef-edd0-49bf-ba6b-1b470f116154",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "ka393939",
-                            OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "255e0171-f444-4994-a7c0-387454566d84",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a")
-                        },
-                        new
-                        {
-                            Id = "1f996588-52ff-4e3d-8709-146c8ff84aa2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0350bfd0-eca5-4b57-ae69-497482765b00",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "kaw3939",
-                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e0214506-4eaf-4e21-8097-3fae340fd906",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811")
-                        },
-                        new
-                        {
-                            Id = "88523f5b-99e3-4e5d-831c-4641e1bd7f5d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6e0cbc1-9404-46e5-b918-f1c861511f89",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "megan12",
-                            OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"),
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "27ab7d15-8a42-4ea0-af56-c83326198646",
-                            TwoFactorEnabled = false,
-                            UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -239,15 +172,15 @@ namespace SchoolAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fd3c815d-5358-484d-b49d-6842d78dd67a",
-                            ConcurrencyStamp = "678902d6-76c0-48f2-af08-605828309caf",
+                            Id = "7d6595f6-5dc3-4c05-91e0-ac3bbd7cb230",
+                            ConcurrencyStamp = "8ec71bbb-c1f7-4788-8371-ac3cb6fedb0f",
                             Name = "manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "c90cac24-56a0-40cf-aa14-13292b655ed0",
-                            ConcurrencyStamp = "621b914f-b412-4576-98fb-8cb8916055d6",
+                            Id = "4943e50e-9199-4610-8371-0bd8cca4c5d1",
+                            ConcurrencyStamp = "ca169bf9-2da4-472e-8770-77261a28424d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -359,13 +292,9 @@ namespace SchoolAPI.Migrations
 
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
-                    b.HasOne("Entities.Models.Organization", "Organization")
+                    b.HasOne("Entities.Models.Organization", null)
                         .WithMany("Users")
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Organization");
+                        .HasForeignKey("OrganizationId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SchoolAPI.Migrations
 {
-    public partial class CreatingIdentityTables : Migration
+    public partial class InitialData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,29 +178,33 @@ namespace SchoolAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Organizations",
-                columns: new[] { "OrganizationId", "City", "Country", "OrgName" },
-                values: new object[] { new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), "Bloomfield", "USA", "xyz org" });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "38117b0c-7997-4763-bb76-5ba604bc73d0", "e5ee7a3b-0ec4-4aa2-b963-36e392da020c", "manager", "MANAGER" },
+                    { "200918c0-2cc1-46ba-bd3f-85ed79c8f740", "a80d13cf-c396-47e5-99d5-858f9d082f7e", "Administrator", "ADMINISTRATOR" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Organizations",
                 columns: new[] { "OrganizationId", "City", "Country", "OrgName" },
-                values: new object[] { new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), "Lusaka", "ZM", "lmnop org" });
-
-            migrationBuilder.InsertData(
-                table: "Organizations",
-                columns: new[] { "OrganizationId", "City", "Country", "OrgName" },
-                values: new object[] { new Guid("3d490a70-94ce-4d15-9494-5248280c2ce6"), "New York", "USA", "megan's organization" });
+                values: new object[,]
+                {
+                    { new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), "Bloomfield", "USA", "xyz org" },
+                    { new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), "Lusaka", "ZM", "lmnop org" },
+                    { new Guid("3d490a70-94ce-4d15-9494-5248280c2ce6"), "New York", "USA", "megan's organization" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { "a3302f5f-bd25-494e-86f5-82e79028c050", 0, "f8877616-3fd4-4090-aaa8-16147456ce69", null, false, null, null, false, null, "kwilliams", null, null, new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), null, null, false, "d45769cf-ed78-42a9-96f4-0e0256df1699", false, new Guid("80abbca8-664d-4b20-b5de-024705497d4a"), null },
-                    { "82938624-240b-4f85-8869-abfc8f183b98", 0, "0caa1ed4-cdc2-4b39-85a0-a689f932d8b0", null, false, null, null, false, null, "ka393939", null, null, new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), null, null, false, "8808a0f3-741a-40a2-a8d0-c6aea4dd2eb6", false, new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"), null },
-                    { "11ba1a53-fcf1-4ac0-945d-05f3b4c0ad81", 0, "3ae723b3-e033-4a8e-b54e-148dd6a5a1bd", null, false, null, null, false, null, "kaw3939", null, null, new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), null, null, false, "adc28533-8051-4758-a3a4-62b9520eb731", false, new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"), null },
-                    { "2ce2d910-0641-42a2-9f37-8bba0a90f17c", 0, "1efaa060-5dab-4a4e-b444-f0c78ec8a733", null, false, null, null, false, null, "megan12", null, null, new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), null, null, false, "18f7585a-a3cf-4477-b786-33bcb9b39ac7", false, new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812"), null }
+                    { "d0cbfcfa-9e04-49f5-b49d-eb6cf452f95a", 0, "ac8316fa-7f14-4220-a510-4b944c6c4ab1", null, false, null, null, false, null, "kwilliams", null, null, new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), null, null, false, "00da1708-2a13-4adf-a0dc-1c013378006b", false, new Guid("80abbca8-664d-4b20-b5de-024705497d4a"), null },
+                    { "bd5731ae-aff2-4164-8834-5c77e7e72ba9", 0, "ff50f713-244b-4314-95fe-297fa97e6b92", null, false, null, null, false, null, "ka393939", null, null, new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"), null, null, false, "cd2305e8-4288-4387-a662-71bf7a2c60c7", false, new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"), null },
+                    { "1772724e-94fc-4bb1-8d3a-568f6bf05be4", 0, "445581ef-b657-44b3-a96c-866cfb3d518c", null, false, null, null, false, null, "kaw3939", null, null, new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), null, null, false, "b4d9874b-d4c9-4fca-a87f-13aac6e4a1fe", false, new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"), null },
+                    { "f6f44ed3-9cb3-40b2-9c7c-c941cbdf04c2", 0, "b6d59201-7318-4f20-88d1-4f3dead64745", null, false, null, null, false, null, "megan12", null, null, new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5"), null, null, false, "9f994605-d889-4078-a95f-aa5c2557b43a", false, new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812"), null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -9,33 +9,7 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasData
-            (
-                new User
-                {
-                    UserId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                    Name = "kwilliams",
-                    OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871")
-                },
-                new User
-                {
-                    UserId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-                    Name = "ka393939",
-                    OrganizationId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871")
-                },
-                 new User
-                 {
-                     UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
-                     Name = "kaw3939",
-                     OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5")
-                 },
-                 new User
-                 {
-                     UserId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479812"),
-                     Name = "megan12",
-                     OrganizationId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce5")
-                 }
-            );
+            
         }
     }
 }
