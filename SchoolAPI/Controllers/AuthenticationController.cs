@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using ActionFilters;
+using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
@@ -29,7 +30,7 @@ namespace SchoolAPI.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
@@ -51,7 +52,7 @@ namespace SchoolAPI.Controllers
         }
 
         [HttpPost("login")]
-        //[ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
             if (!await _authManager.ValidateUser(user))

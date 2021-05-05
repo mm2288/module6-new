@@ -1,3 +1,4 @@
+using ActionFilters;
 using AutoMapper;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -52,6 +53,9 @@ namespace SchoolAPI
             services.ConfigureJWT(Configuration);
 
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateOrganizationExistsAttribute>();
+            services.AddScoped<ValidateUserExistsAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

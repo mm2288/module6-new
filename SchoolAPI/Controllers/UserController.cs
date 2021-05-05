@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using ActionFilters;
+using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
@@ -49,24 +50,11 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateUserExistsAttribute))]
         public IActionResult UpdateUser(Guid id, [FromBody] UserForUpdateDto user)
         {
-            if (user == null)
-            {
-                _logger.LogError("UserForUpdateDto object sent from client is null.");
-                return BadRequest("UserForUpdateDto object is null");
-            }
-            if (!ModelState.IsValid)
-            {
-                _logger.LogError("Invalid model state for the UserForUpdateDto object");
-                return UnprocessableEntity(ModelState);
-            }
-            var userEntity = _repository.User.GetUser(id, trackChanges: true);
-            if (userEntity == null)
-            {
-                _logger.LogInfo($"User with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var userEntity = HttpContext.Items["user"] as User;
 
             _mapper.Map(user, userEntity);
             _repository.Save();
@@ -75,14 +63,11 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(ValidateUserExistsAttribute))]
         public IActionResult DeleteUser(Guid id)
         {
-            var user = _repository.User.GetUser(id, trackChanges: false);
-            if (user == null)
-            {
-                _logger.LogInfo($"User with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            //var user = _repository.User.GetUser(id, trackChanges: false);
+            var user = HttpContext.Items["user"] as User;
 
             _repository.User.DeleteUser(user);
             _repository.Save();
