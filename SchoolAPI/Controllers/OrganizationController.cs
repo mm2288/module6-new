@@ -25,7 +25,7 @@ namespace SchoolAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "getAllOrganizations"), Authorize]
+        [HttpGet(Name = "getAllOrganizations"), Authorize(Roles = "Manager")]
         public IActionResult GetOrganizations()
         {
             var organizations = _repository.Organization.GetAllOrganizations(trackChanges: false);

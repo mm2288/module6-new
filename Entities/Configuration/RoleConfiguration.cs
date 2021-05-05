@@ -14,7 +14,7 @@ namespace Entities.Configuration
             builder.HasData(
                 new IdentityRole
                 {
-                    Name = "manager",
+                    Name = "Manager",
                     NormalizedName = "MANAGER"
                 },
                 new IdentityRole
