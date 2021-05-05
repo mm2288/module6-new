@@ -2,6 +2,7 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace SchoolAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "getAllOrganizations")]
+        [HttpGet(Name = "getAllOrganizations"), Authorize]
         public IActionResult GetOrganizations()
         {
             var organizations = _repository.Organization.GetAllOrganizations(trackChanges: false);
