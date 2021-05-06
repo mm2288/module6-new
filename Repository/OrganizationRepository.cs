@@ -20,7 +20,7 @@ namespace Repository
             var organizations = FindAll(trackChanges)
                 .FilterOrganizations(organizationParameters.FilterCity)
                 .Search(organizationParameters.SearchTerm)
-                .OrderBy(c => c.OrgName)
+                .Sort(organizationParameters.OrderBy)
                 .ToList();
 
             return PagedList<Organization>.ToPagedList(organizations, organizationParameters.PageNumber, organizationParameters.PageSize);

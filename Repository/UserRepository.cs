@@ -18,8 +18,8 @@ namespace Repository
         public PagedList<User> GetAllUsers(UserParameters userParameters, bool trackChanges)
         {
             var users = FindAll(trackChanges)
-                .OrderBy(c => c.UserName)
                 .Search(userParameters.SearchTerm)
+                //.Sort(userParameters.OrderBy)
                 .ToList();
 
             return PagedList<User>.ToPagedList(users, userParameters.PageNumber, userParameters.PageSize);

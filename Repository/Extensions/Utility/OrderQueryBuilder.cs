@@ -5,19 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Repository.Extensions
+namespace Repository.Extensions.Utility
 {
-    public static class RepositoryUserExtensions
+    public static class OrderQueryBuilder
     {
-        /*public static IQueryable<User> Sort(this IQueryable<User> users, string orderByQueryString)
+        public static string CreateOrderQuery<T>(string orderByQueryString)
         {
-            if (string.IsNullOrWhiteSpace(orderByQueryString))
-            {
-                return users.OrderBy(e => e.FirstName);
-            }
-
             var orderParams = orderByQueryString.Trim().Split(',');
-            var propertyInfos = typeof(User).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var propertyInfos = typeof(Organization).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var orderQueryBuilder = new StringBuilder();
 
             foreach (var param in orderParams)
@@ -42,24 +37,7 @@ namespace Repository.Extensions
 
             var orderQuery = orderQueryBuilder.ToString().TrimEnd(',', ' ');
 
-            if (string.IsNullOrWhiteSpace(orderQuery))
-            {
-                return users.OrderBy(e => e.FirstName);
-            }
-
-            return users.OrderBy(orderQuery);
-        }*/
-
-        public static IQueryable<User> Search(this IQueryable<User> users, string searchTerm)
-        {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-            {
-                return users;
-            }
-
-            var lowerCaseTerm = searchTerm.Trim().ToLower();
-
-            return users.Where(e => e.FirstName.ToLower().Contains(lowerCaseTerm));
+            return orderQuery;
         }
     }
 }
