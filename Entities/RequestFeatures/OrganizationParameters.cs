@@ -6,6 +6,7 @@ namespace Entities.RequestFeatures
 {
     public class OrganizationParameters : RequestParameters
     {
-
+        public string FilterCity { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

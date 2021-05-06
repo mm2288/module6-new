@@ -2,6 +2,7 @@
 using Entities;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Repository.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace Repository
         public PagedList<User> GetAllUsers(UserParameters userParameters, bool trackChanges)
         {
             var users = FindAll(trackChanges)
-            .OrderBy(c => c.UserName)
-            .ToList();
+                .OrderBy(c => c.UserName)
+                .Search(userParameters.SearchTerm)
+                .ToList();
 
             return PagedList<User>.ToPagedList(users, userParameters.PageNumber, userParameters.PageSize);
         }

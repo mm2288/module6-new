@@ -2,6 +2,7 @@
 using Entities;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Repository.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Repository
         public PagedList<Organization> GetAllOrganizations(OrganizationParameters organizationParameters, bool trackChanges)
         {
             var organizations = FindAll(trackChanges)
+                .FilterOrganizations(organizationParameters.FilterCity)
+                .Search(organizationParameters.SearchTerm)
                 .OrderBy(c => c.OrgName)
                 .ToList();
 
