@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,15 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        public IEnumerable<Organization> GetAllOrganizations(bool trackChanges) =>
-          FindAll(trackChanges)
-          .OrderBy(c => c.OrgName)
-          .ToList();
+        public PagedList<Organization> GetAllOrganizations(OrganizationParameters organizationParameters, bool trackChanges)
+        {
+            var organizations = FindAll(trackChanges)
+                .OrderBy(c => c.OrgName)
+                .ToList();
 
+            return PagedList<Organization>.ToPagedList(organizations, organizationParameters.PageNumber, organizationParameters.PageSize);
+        }
+          
         public Organization GetOrganization(Guid companyId, bool trackChanges) =>
          FindByCondition(c => c.Id.Equals(companyId), trackChanges)
         .SingleOrDefault();

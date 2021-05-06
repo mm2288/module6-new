@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,15 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        public IEnumerable<User> GetAllUsers(bool trackChanges) =>
-          FindAll(trackChanges)
-          .OrderBy(c => c.UserName)
-          .ToList();
+        public PagedList<User> GetAllUsers(UserParameters userParameters, bool trackChanges)
+        {
+            var users = FindAll(trackChanges)
+            .OrderBy(c => c.UserName)
+            .ToList();
 
+            return PagedList<User>.ToPagedList(users, userParameters.PageNumber, userParameters.PageSize);
+        }
+          
         public User GetUser(Guid Id, bool trackChanges) =>
          FindByCondition(c => c.Id.Equals(Id), trackChanges)
         .SingleOrDefault();

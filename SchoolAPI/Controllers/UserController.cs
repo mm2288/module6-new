@@ -3,7 +3,9 @@ using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,17 +29,22 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet(Name = "getAllUsers")]
-        public IActionResult GetUsers()
+        public IActionResult GetUsers([FromQuery] UserParameters userParameters)
         {
-             var users = _repository.User.GetAllUsers(trackChanges: false);
-             var userDto = _mapper.Map<IEnumerable<UserDto>>(users);
-             return Ok(userDto);
+            var users = _repository.User.GetAllUsers(userParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(users.MetaData));
+
+            var userDto = _mapper.Map<IEnumerable<UserDto>>(users);
+
+            return Ok(userDto);
         }
 
         [HttpGet("{id}", Name = "getUserById")]
         public IActionResult GetUser(Guid id)
         {
-            var user = _repository.User.GetUser(id, trackChanges: false); if (user == null)
+            var user = _repository.User.GetUser(id, trackChanges: false); 
+            if (user == null)
             {
                 _logger.LogInfo($"User with id: {id} doesn't exist in the database.");
                 return NotFound();

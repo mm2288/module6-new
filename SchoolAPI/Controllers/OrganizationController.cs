@@ -3,8 +3,10 @@ using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -27,9 +29,11 @@ namespace SchoolAPI.Controllers
         }
 
         [HttpGet(Name = "getAllOrganizations"), Authorize(Roles = "Manager")]
-        public IActionResult GetOrganizations()
+        public IActionResult GetOrganizations([FromQuery] OrganizationParameters organizationParameters)
         {
-            var organizations = _repository.Organization.GetAllOrganizations(trackChanges: false);
+            var organizations = _repository.Organization.GetAllOrganizations(organizationParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(organizations.MetaData));
 
             var organizationDto = _mapper.Map<IEnumerable<OrganizationDto>>(organizations);
             //uncomment the code below to test the global exception handling
